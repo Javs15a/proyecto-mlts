@@ -1,1 +1,28 @@
 
+server:
+  port: 4041
+
+# Database config
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3317}/${DB_SCHEMA:store}?autoReconnect=true&useSSL=false&useTimezone=true&serverTimezone=${TZ:America/Mexico_City}&useLegacyDatetimeCode=false"
+    username: "${DB_USERNAME:root}"
+    password: "${DB_PASSWORD:root}"
+    dbcp2:
+      validation-query: SELECT 1
+    hikari:
+      maximum-pool-size: "${MAXIMUM_POOL_SIZE:10}"
+  jpa:
+    database: MYSQL
+    properties:
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate:
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        use-new-id-generator-mappings: false
+      open-in-view: false
+      format_sql: true
+    show-sql: true
+  profiles:
+    active: default%
