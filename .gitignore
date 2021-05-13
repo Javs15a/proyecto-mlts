@@ -1,0 +1,17 @@
+store/HELP.md
+store/.gradle
+store/build/
+store/.gitignore
+!store/gradle/wrapper/gradle-wrapper.jar
+!store/**/src/main/**/build/
+!store/**/src/test/**/build/
+
+
+### IntelliJ IDEA ###
+store/.idea
+store/*.iws
+store/*.iml
+store/*.ipr
+store/out/
+!store/**/src/main/**/out/
+!store/**/src/test/**/out/
