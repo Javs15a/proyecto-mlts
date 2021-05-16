@@ -2,11 +2,9 @@ package com.mlts.store.Entity.Product;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 @Getter
 @Setter
@@ -20,11 +18,14 @@ public class ArticuloEntity {
     @Column(name = "idarticulo")
     private Integer id;
 
+    @NotNull
+    @Column(name = "idcategoria")
+    private Integer categoriaRef;
+
     @ManyToOne
-    @JoinColumn(name = "idcategoria", nullable = false, referencedColumnName = "idcategoria")
+    @JoinColumn(name = "idcategoria", referencedColumnName = "idcategoria", insertable = false, updatable = false)
     private CategoriaEntity categoria;
 
-    @Null
     @Column(name = "codigo")
     private String codigo;
 
@@ -40,15 +41,12 @@ public class ArticuloEntity {
     @Column(name = "stock")
     private Integer stock;
 
-    @Null
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Null
     @Column(name = "url_path")
     private String img;
 
-    @ColumnDefault(value = "true")
     @Column(name = "activo")
     private Boolean activo;
 }

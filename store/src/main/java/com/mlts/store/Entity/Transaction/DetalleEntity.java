@@ -18,12 +18,20 @@ public class DetalleEntity {
     @Column(name = "iddetalle")
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idtransaccion", referencedColumnName = "idtransaccion")
+    @NotNull
+    @Column(name = "idtransaccion")
+    private Integer transaccionRef;
+
+    @ManyToOne
+    @JoinColumn(name = "idtransaccion", referencedColumnName = "idtransaccion", insertable = false, updatable = false)
     private TransaccionEntity transaccion;
 
+    @NotNull
+    @Column(name = "idarticulo")
+    private Integer articuloRef;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idarticulo", referencedColumnName = "idarticulo")
+    @JoinColumn(name = "idarticulo", referencedColumnName = "idarticulo", insertable = false, updatable = false)
     private ArticuloEntity articulo;
 
     @NotNull
@@ -31,10 +39,9 @@ public class DetalleEntity {
     private Integer cantidad;
 
     @NotNull
-    @Column(name = "precio")
-    private Float precio; // cantidad * precio_venta (articulo)
+    @Column(name = "monto_total")
+    private Float monto; // cantidad * precio_venta (articulo)
 
-    @Null
     @Column(name = "descuento")
     private Float descuento;
 }

@@ -8,7 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,15 +20,18 @@ public class UsuarioEntity {
     @Column(name = "idusuario")
     private Integer id;
 
+    @NotNull
+    @Column(name = "idrol")
+    private Integer rolRef;
+
     @ManyToOne
-    @JoinColumn(name = "idrol", referencedColumnName = "idrol", nullable = false)
+    @JoinColumn(name = "idrol", referencedColumnName = "idrol", insertable = false, updatable = false)
     private RolEntity rol;
 
     @NotNull
     @Column(name = "nombre")
     private String nombre;
 
-    @Null
     @Column(name = "telefono")
     private String telefono;
 
@@ -40,10 +43,9 @@ public class UsuarioEntity {
     @Column(name = "password")
     private String password;
 
-    @ColumnDefault(value = "true")
     @Column(name = "activo")
     private Boolean activo;
 
     @OneToMany(mappedBy = "usuario")
-    private Set<TransaccionEntity> transacciones;
+    private List<TransaccionEntity> transacciones;
 }

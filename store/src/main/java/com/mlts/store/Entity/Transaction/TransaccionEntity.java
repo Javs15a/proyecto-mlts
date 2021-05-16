@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,12 +20,20 @@ public class TransaccionEntity {
     @Column(name = "idtransaccion")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "idpersona", nullable = false, referencedColumnName = "idpersona")
-    private PersonaEntity persona;
+    @NotNull
+    @Column(name = "idpersona")
+    private Integer personaRef;
 
     @ManyToOne
-    @JoinColumn(name = "idusuario", nullable = false, referencedColumnName = "idusuario")
+    @JoinColumn(name = "idpersona", referencedColumnName = "idpersona", insertable = false, updatable = false)
+    private PersonaEntity persona;
+
+    @NotNull
+    @Column(name = "idusuario")
+    private Integer usuarioRef;
+
+    @ManyToOne
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario", insertable = false, updatable = false)
     private UsuarioEntity usuario;
 
     @NotNull
@@ -50,4 +59,7 @@ public class TransaccionEntity {
     @NotNull
     @Column(name = "total")
     private Float total;
+
+    @OneToMany(mappedBy = "transaccion")
+    private List<DetalleEntity> detalle;
 }
